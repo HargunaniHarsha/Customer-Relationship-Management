@@ -1,0 +1,5 @@
+Lab1 - Operating fields - mandatory, changing type, unique
+Lab2 - Creating Formula Fields and Validation Rules
+Lab3 - Implementing Profiles and Users. Profile specific and user specific validation rules
+Lab4 - Creating and Changing Relationships. Roll Up Summary
+Lab5 - Object Level and Field Level Security using Profile and Permission Sets
