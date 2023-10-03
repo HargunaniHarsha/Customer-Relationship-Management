@@ -134,5 +134,14 @@ The Sales Strategy Manager reports to the Chief Sales Officer and directly super
 
 <b> Solutions </b><br>
 
-Setup | Home | Users > Roles | Setup Roles 
+Setup | Home | Users > Roles | Setup Roles | Add Role under <b>CEO</b> | Enter Details | Save <br>
+For Strategy Manager | Expand CEO and click on "Add Roles" under Chief Sales Officer
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/ee5d8fd8-5d58-4820-bf2c-1a7555d46980)
+
+Follow same for Training Coordinator. Final Tree will look like - 
+
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/f85c3343-92f9-44ce-98a1-535da80c4575)
+
+<br>
+<h2 align=center> Define Sharing Rules </h2>
 
