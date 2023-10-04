@@ -145,3 +145,42 @@ Follow same for Training Coordinator. Final Tree will look like -
 <br>
 <h2 align=center> Define Sharing Rules </h2>
 
+<b> Create a sharing rule for the Project object </b>
+<p> In most cases, only the record owner or users above the owner in the role hierarchy should see project records. However, the Training Coordinator needs read-only access to high-priority project records.
+Create a custom picklist field on the Project object named Priority with the following values: High, Medium, and Low. Then create a criteria-based sharing rule to share high-priority records with the Training Coordinator. </p>
+
+<b> Before You Start </b>
+<p> Make sure you complete the hands-on challenges in the previous units of this module before you attempt this challenge. The work you do here builds on work you do in those units.
+If you haven't created a custom field before, complete the Data Modeling module before you attempt this challenge. </p>
+
+<b> Challenge Requirements </b>
+* Create a custom field for the Project object:
+  * Field Type: Picklist
+  * Field Label: Priority
+  * Field Name: Priority
+  * Values (each value separated by a new line):
+    * High
+    * Medium
+    * Low
+   * Make the field visible to all profiles and add it to all page layouts
+* Create a sharing rule for the Project object:
+  * Label: choose any label you want
+  * Rule Name: Share_Project_Records
+  * Rule Type: Based on criteria
+  * Field: Priority
+  * Operator: equals
+  * Value: High
+  * Share with (role): Training Coordinator
+  * Access level: Read Only
+* Make sure the organization-wide defaults for the Project object are set to Private
+
+<b> Solution: </b><br>
+
+Setup | Home | Sharing Settings
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/cbb62d13-ff92-49ee-b4ab-24a8b19a144e)
+
+Enter given details | Save
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/ba661f69-bd70-4623-8731-312f136bad12)
+
+Ensure the organization-wide defaults for the Project object are set to Private
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/634260d1-7f2e-4de1-81a9-2e06e53b7a72)
