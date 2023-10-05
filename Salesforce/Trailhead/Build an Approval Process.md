@@ -1,4 +1,4 @@
-<b> Create an approval process </b>
+<h2 align=center> Create an approval process </h2>
 <p> Create an approval process to ensure that prospect accounts with more than 500 employees are approved before they’re converted to customers </p>
 
 <b> Before You Start </b>
@@ -33,5 +33,20 @@
   * Action: Update the Type field to Prospect
 * Activate the approval process
 
+<br>
 <b> Soultion </b> <br>
+
+Setup | Home | Approval Process | Manage Approval Processes For: Account | Create New Approval Process | Use Jump Start Wizard | Enter Details | Save
+![Screenshot 2023-10-05 213208](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/927ed0fe-4018-44e6-acd4-b1c6197177ce)
+
+Scroll down to <i>Initial Submission Actions</i> | Add New | Field Update | Enter Details | Save
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/60278c63-d691-4a6a-9f87-308bd99bb8d0)
+
+<i>Initial Submission Actions</i> | Add Existing | Search - Field Update | Select the Action and click rigth arrow below "Add"
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/99d9e96c-3cde-49ce-a1fd-2f86c0281a90)
+
+Follow Similar Steps for <i>Final Approval Actions</i>
+
+Click on "Activate" | Ok
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/b158c422-3e77-4a62-a0c3-05edbef3648e)
 
