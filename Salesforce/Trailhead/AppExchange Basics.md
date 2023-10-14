@@ -27,12 +27,11 @@ Q2.
 ![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/0fb02b1a-bebc-4b2c-bf14-32b02543e972)
 
 <br>
-<h2 align=center> Install AppExchange Packages </h2>
+<h2 align=center> Connect and Contribute to the AppExchange Community </h2>
 
-Step1: Launch
-![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/b9f4ef68-f07e-41a9-90ac-98f9c9369a54)
+Q1.
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/0981fd01-f0a5-4fe8-9960-6f99a411c4ec)
 
-Step2: Apps | Visit AppExchange | All Apps | Search <i> Salesforce Adoption Dashboards</i>
+Q2. 
+![image](https://github.com/HargunaniHarsha/Customer-Relationship-Management/assets/90439153/cddd9a08-2c9f-4942-a3fb-da029f3e14e8)
 
-
-Step3: Get it Now | Open Login Screen | Allow | Install here | Enter Details | Confirm and Install
