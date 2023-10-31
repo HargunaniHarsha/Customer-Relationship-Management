@@ -1,4 +1,4 @@
-<h3 align=center>List of All Labs</h3>
+<h3 align=center>List of All CRM Labs</h3>
 
 <p>Lab1 - Operating fields - mandatory, changing type, unique</p>
 <p>Lab2 - Creating Formula Fields and Validation Rules</p>
