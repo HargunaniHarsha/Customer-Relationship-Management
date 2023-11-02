@@ -1,2 +1,3 @@
 # Customer-Relationship-Management
-Guides on CRM using Salesforce and Trailhead Solutions
+Guides on CRM and Salesforce
+Plus Trailhead Solutions
