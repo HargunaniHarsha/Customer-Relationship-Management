@@ -21,3 +21,63 @@
 
 <br>
 Solution - <br>
+Create new field <br>
+Enter Apex Class code - <br>
+
+```
+public class AccountProcessor {
+    @future
+    public static void countContacts(List<Id> accountIds) {
+        List<Account> accToUpdate = new List<Account>();
+        List<Account> acc = [Select Id, Name,
+                            (Select Id from Contacts)
+                            from Account Where Id in :accountIds];
+        for(Account a : acc) {
+            List<Contact> contactList = a.Contacts;
+            a.Number_Of_Contacts__c = contactList.size();
+            accToUpdate.add(a);
+        }
+        update accToUpdate;
+    }
+}
+```
+
+Debug | Open Execute Anonymous Window | Enter Code - <br>
+
+```
+List<Id> accountIds = new List<Id>();
+accountIds.add(' ');
+accountIds.add(' ');
+
+AccountProcessor.countContacts(accountIds);
+```
+
+Get Ids of Account records from App and paste them within the single quotes. <br>
+Execute <br><br>
+New Apex Class code - <br>
+```
+@isTest
+private class AccountProcessorTest {
+    @isTest
+    private static void testCountContacts() {
+        Account newAccount = new Account(Name='Test Account');
+        insert newAccount;
+        
+        Contact newContact1 = new Contact(FirstName='John', LastName='Doe', AccountId=newAccount.Id);
+        insert newContact1;
+        
+        Contact newContact2 = new Contact(FirstName='Jane', LastName='Doe', AccountId=newAccount.Id);
+        insert newContact2;
+        
+        List<Id> accountIds = new List<Id>();
+        accountIds.add(newAccount.Id);
+        
+        Test.startTest();
+        AccountProcessor.countContacts(accountIds);
+        Test.stopTest();
+    }
+}
+```
+
+Click on "Run Test" on top right corner.
+<br>
