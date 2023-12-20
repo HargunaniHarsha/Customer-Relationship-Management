@@ -17,3 +17,66 @@ Create a Queueable Apex class that inserts the same Contact for each Account for
 
 <br>
 <h3> Solution </h3>
+
+Developer Console | File | New | Apex Class | Name - AddPrimaryContact <br>
+
+```
+public class AddPrimaryContact implements Queueable {
+    private Contact con;
+    private String state;
+    
+    public AddPrimaryContact(Contact cont, String statestr) {
+        this.con = cont;
+        this.state = statestr;
+    }
+    
+    public void execute (QueueableContext context) {
+        List<Account> accounts = [Select Id, Name,
+                                 (Select FirstName, LastName, Id from contacts)
+                                 from Account where BillingState = :state
+                                 Limit 200];
+        List<Contact> primaryContacts = new List<Contact>();
+        
+        for(Account acc: accounts) {
+            Contact c = con.clone();
+            c.AccountId = acc.Id;
+            primaryContacts.add(c);
+        }
+        
+        if(primaryContacts.size() > 0) {
+            insert primaryContacts;
+        }
+    }
+}
+```
+
+<br> New | Apex Class | Name - AddPrimaryContactTest <br>
+```
+@isTest
+public class AddPrimaryContactTest {
+    static testmethod void testQueueable() {
+        List<ACcount> testAccounts = new List<Account>();
+        for(Integer i=0 ; i<50 ; i++) {
+            testAccounts.add(new Account(Name='Account'+i, BillingState='CA'));
+        }
+        for(Integer j=0 ; j<50 ; j++) {
+            testAccounts.add(new Account(Name='Account'+j, BillingState='NY'));
+        }
+        insert testAccounts;
+        
+        Contact testContact = new Contact(FirstName = 'John', LastName = 'Doe');
+        insert testContact;
+        
+        AddPrimaryContact addit = new addPrimaryContact(testContact, 'CA');
+        
+        Test.startTest();
+        system.enqueueJob(addit);
+        Test.stopTest();
+        
+        System.assertEquals(50, [Select count() from Contact Where accountId in 
+                                 (Select Id from Account where BillingState='CA')]);
+    }
+}
+```
+
+<br> Click on "Run all tests" button. Done! <br>
