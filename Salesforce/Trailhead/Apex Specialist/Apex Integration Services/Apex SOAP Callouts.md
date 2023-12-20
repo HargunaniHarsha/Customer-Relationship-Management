@@ -19,4 +19,65 @@ Generate an Apex class using WSDL2Apex for a SOAP web service, write unit tests 
   * Run your test class at least once (via Run All tests the Developer Console) before attempting to verify this challenge.
  
 **Solution**
+<br>
+1. Download WSDL file and rename as _parkServices_
+2. Setup | QuickFind Box - Apex Class | Generate from WSDL
+3. Choose File - upload _parkServices.xml_ file and click "parse xml".
+4. Give Apex Class Name - **ParkService**.
+5. Developer Console | File | New | Apex Class
 
+<br>
+ParkLocator.apxc <br>
+
+```
+public class ParkLocator {
+    public static string[] country(string theCountry) {
+        ParkService.ParksImplPort parkSvc = new ParkService.ParksImplPort();
+        return parkSvc.byCountry(theCountry);
+    }
+}
+```
+
+<br>
+ParkServiceMock.apxc <br>
+
+```
+@isTest
+global class ParkServiceMock implements WebServiceMock {
+    global void doInvoke(
+        Object stub,
+        Object request,
+        Map<String, Object> response,
+        String endpoint,
+        String soapAction,
+        String requestName,
+        String responseNS,
+        String responseNam,
+        String responseType
+    ){
+        ParkService.byCountryResponse response_x = new ParkService.byCountryResponse();
+        response_x.return_x = new List<String>{'Yellowstone', 'Mackinac National Park', 'Yosemite'};
+            response.put('response_x', response_x);
+    }
+}
+```
+
+<br>
+ParkLocator.apxc <br>
+
+```
+@isTest
+public class ParkLocatorTest {
+    @isTest static void testCallout() {
+        Test.setMock(WebServiceMock.class, new ParkServiceMock());
+        String country = 'United States';
+        List<String> result = ParkLocator.country(country);
+        List<String> parks = new List<String>{'Yellowstone', 'Mackinac National Park', 'Yosemite'};
+        System.assertEquals(parks, result);
+    }
+}
+```
+
+Test >
+- [x] Always Run Asynchronously | Run All.
+Done!
