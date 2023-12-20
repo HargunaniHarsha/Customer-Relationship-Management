@@ -19,3 +19,61 @@ Create an Apex class that calls a REST endpoint to return the name of an animal,
   * Unit tests must cover all lines of code included in the AnimalLocator class, resulting in 100% code coverage
   * Run your test class at least once (via Run All tests the Developer Console) before attempting to verify this challenge.
 
+**Solution**
+
+<br>Developer Console | File | New | Apex Class - AnimalLocator
+
+```
+public class AnimalLocator {
+    public static String getAnimalNameById(Integer x) {
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals/' + x);
+        req.setMethod('GET');
+        Map<String, Object> animal = new Map<String, Object>();
+        HttpResponse res = http.send(req);
+        if(res.getStatusCode() == 200) {
+            Map<String, Object> results = (Map<String, Object>)JSON.deserializeUntyped(res.getBody());
+            animal = (Map<String, Object>) results.get('animal');
+        }
+        return (String)animal.get('name');
+    }
+}
+```
+
+<br>File | New | Apex Class - AnimalLocatorTest
+
+```
+@isTest
+private class AnimalLocatorTest {
+    @isTest static void AnimalLocatorMock1() {
+        try{
+            Test.setMock(HttpCalloutMock.class, new AnimalLocatorMock());
+            string result = AnimalLocator.getAnimalNameById(1);
+            string expectedResult = 'fox';
+            System.assertEquals(result, expectedResult);
+        }
+        catch(exception e) {
+            System.debug('The following exception has occurred: ' + e.getMessage());
+        }
+    }
+}
+```
+
+<br>File | New | Apex Class - AnimalLocatorMock
+
+```
+@isTest
+global class AnimalLocatorMock implements HttpCalloutMock {
+    global HTTPResponse respond(HTTPRequest request) {
+        HttpResponse response = new HttpResponse();
+        response.setHeader('Content-Type', 'application/json');
+        response.setBody('{"animals": ["lion", "fox", "bear", "panda", "snake", "racoon"]}');
+        response.setStatusCode(200);
+        return response;
+    }
+}
+```
+
+<br> Test >
+- [x] Always Run Asynchronously |  Run All | Success!
