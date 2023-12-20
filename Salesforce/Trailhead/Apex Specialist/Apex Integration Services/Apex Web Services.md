@@ -15,5 +15,59 @@ Create an Apex REST class that is accessible at /Accounts/<Account_ID>/contacts.
 * Run your test class at least once (via Run All tests the Developer Console) before attempting to verify this challenge.
 
 <br>
-**Solution** <br>
 
+**Solution**
+
+Developer Console | File | New | Apex Class
+<br> 
+
+AccountManager.apxc <br>
+
+```
+@RestResource(urlMapping = '/Accounts/*/contacts')
+global with sharing class AccountManager {
+    @HttpGet
+    global static Account getAccount() {
+        RestRequest request = RestContext.request;
+        string accountId = request.requestURI.substringBetween('Accounts/', '/contacts');
+        Account result = [SELECT Id, Name, (Select Id, Name From Contacts) From Account Where Id=:accountId Limit 1];
+        return result;
+    }
+}
+```
+
+<br>
+
+AccountManagerTest.apxc <br>
+
+```
+@IsTest
+public class AccountManagerTest {
+    @IsTest static void testGetContactsByAccountId(){
+        Id recordId = createTestRecord();
+        RestRequest request = new RestRequest();
+        request.requestUri = 'https://yourInstance.my.salesforce.com/services/apexrest/Accounts/'+ recordId+'/contacts';
+        request.httpMethod = 'GET';
+        RestContext.request = request;
+        Account thisAccount = AccountManager.getAccount();
+        System.assert(thisAccount != null);
+        System.assertEquals('Test record', thisAccount.Name);
+    }
+    static Id createTestRecord() {
+        Account accountTest = new Account(Name = 'Test record');
+        insert accountTest;
+        
+        Contact contactTest = new Contact(
+        	FirstName = 'John',
+        	LastName = 'Doe',
+        	AccountId = accountTest.Id);
+        insert contactTest;
+        return accountTest.Id;
+    }
+}
+```
+
+<br>
+
+Test > <br>
+- [x] Always Run Asynchronously | Run All. Done!
